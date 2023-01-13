@@ -9,3 +9,5 @@ This project is to show my skills with HTML, CSS and Javascript.
 I will be updating and making it better constantly so you can check the new updates.
 
 For more information you can contact me by email: ixchajchal1992@gmail.com
+
+This is a new update
