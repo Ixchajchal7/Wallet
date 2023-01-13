@@ -1,0 +1,11 @@
+This project is a Wallet, this project will help you to create an account where you can enter your finantial information, you can add information where you spend your money and you can also add information when you pay.
+
+You'll be able to create an user, you can enter the amount of money you have plus you can also add your password, all your information will be added to the localStorage and once you logout, your login information will be deleted.
+
+In case you need to remember your password, you can also go to the login page and you'll see an option to recover your password, you just need to add your login information and you'll get it.
+
+This project is to show my skills with HTML, CSS and Javascript.
+
+I will be updating and making it better constantly so you can check the new updates.
+
+For more information you can contact me by email: ixchajchal1992@gmail.com

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/creditCard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <title>Credit Card</title>
+</head>
+<body>
+    <section class="user-container">
+        <p>Bienvenido: </p>
+        <h1 class="user"></h1>
+    </section>
+    
+    <header>
+        <div class="logo-container" >
+            <img src="../assets/logo.png" alt="logo credit card">
+        </div>
+        <div class="sesion-container">
+            <div class="sesion-button">
+                <a class="closeSesion">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="add-transaction">
+            <img src="../assets/plus-circle.svg" alt="agregar transaccion">
+        </section>
+        <section class="credit-card">
+            <div class="credit-card-information">
+                <h1>Cliente</h1>
+                <p class="credit-card-name"></p>
+            </div>
+            <div class="credit-card-number">
+                <p>XXXX XXXX XXX 2122</p>
+            </div>
+            <div class="transaction-container">
+                <div class="available">
+                    <p class="available-title">DISPONIBLE</p>
+                    <p class="available-amount"></p>
+                </div>
+                <div class="balance">
+                    <p class="balance-title">SALDO</p>
+                    <p class="balance-amount">GTQ 0.00</p>
+                </div>
+            </div>
+        </section>
+        <section class="movements-container">
+            <p class="movements-title">Detalle de billetera</p>
+            <div class="information-movements">
+                <p>Aún no tienes movimientos en tu billetera</p>
+            </div>
+        </section>
+        <section class="add-transaction-container">
+            <div class="add-movement-container">
+                <div class="add-movement-information">
+                    <div class="add-movement-title">
+                        <p>NUEVO MOVIMIENTO</p>
+                    </div>
+                    <form class="form-movement" action="">
+                        <label for="">Tipo</label>
+                        <div class="dropdown-container">
+                            <i class="uil uil-money-insert"></i>
+                            <select name="" id="selectMovimiento">
+                                <option value="credito">Credito</option>
+                                <option value="gasto">Gasto</option>
+                            </select>
+                        </div>
+                        <label for="">Descripción</label>
+                        <div>
+                            <i class="uil uil-file"></i>
+                            <input id="mensajeEvento" type="text">
+                        </div>
+                        <label for="">Cantidad</label>
+                        <div>
+                            <i class="uil uil-coins"></i>
+                            <input id="dineroEvento" type="number">
+                        </div>
+                        
+                    </form>
+                    <section class="button-container" >
+                        <input class="btn1" type="button" value="Ingresar">
+                        <input class="btn2" type="button" value="Cancelar">
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="../js/creditCard.js" ></script>
+</body>
+</html>
+
