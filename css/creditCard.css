@@ -207,19 +207,24 @@ main{
     font-weight: bolder;
     font-size: 20px;
 }
-.movements-container .information-movements{
+.information-movements{
     width: 700px;
-    height: 90px;
+    height: auto;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
     background-color: rgb(233, 231, 231);
     border-radius: 20px;
+    gap: 20px;
 }
-.movements-container .information-movements p{
-    font-size: 20px;
-    color: gray;
+
+tr{
+    display: flex;
+    border-bottom: 1px solid black;
+    gap: 20px;
 }
+
 .add-transaction-container{
     position: absolute;
     /* z-index: ; */
@@ -238,8 +243,10 @@ main{
     background-color: white;
     padding: 30px;
     display: flex;
-    flex-direction: column;
+    
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
     border-radius: 10px;
 }
 .add-transaction-container .add-movement-container .add-movement-information{
@@ -347,3 +354,4 @@ main{
     font-weight: 500;
     font-size: 24px;
 }
+

@@ -15,6 +15,7 @@ let transactionAmount = document.querySelector("#dineroEvento");
 let transactions = [];
 let date = new Date;
 
+
 function Transaction(type, description, amount){
     this.type = type;
     this.description = description;
@@ -46,9 +47,20 @@ function newTransaction(transactionType, transactionDescription, transactionAmou
         `;
         resume.appendChild(transactionDiv);
         
-    
+        const updateStorage = JSON.stringify(transactions)
+        localStorage.setItem('transactions', updateStorage)
     
 }
+
+let initLocalStorage = ()=>{
+    if (JSON.parse(localStorage.getItem('transactions') != null)) {
+        transactions = JSON.parse(localStorage.getItem('transactions'))
+    } else {
+        transactions = []
+    }
+}
+
+initLocalStorage()
 
 if (window.localStorage.getItem("newLogin") !== null) {
     let userStorage = JSON.parse(window.localStorage.getItem("usuarios"));
@@ -67,20 +79,19 @@ if (window.localStorage.getItem("newLogin") !== null) {
     window.location = "../html/signIn.html";
 }
 
+
+
 sendMovement.addEventListener("click", ()=> {
     newTransaction(transactionType.value, transactionDescription.value, transactionAmount.value);
     movements.style.display = "none";
-
-
-
 })
 
-addTransaction.addEventListener("click", function(){
+addTransaction.addEventListener("click", ()=>{
     movements.style.display = "block";
     movements.style.display = "flex";
 })
 
-cancelBtn.addEventListener("click", function(){
+cancelBtn.addEventListener("click", ()=>{
     movements.style.display = "none";
 })
 
@@ -88,3 +99,7 @@ endSesion.addEventListener("click",  ()=> {
     localStorage.removeItem("newLogin");
     window.location = "../html/signIn.html"
 })
+
+
+
+
