@@ -8,6 +8,7 @@ let creditCardName = document.querySelector(".credit-card-name");
 let availableAmount = document.querySelector(".available-amount");
 let userSection = document.querySelector(".user-container");
 
+
 class Transaction{
     constructor(){
         this.type = '';
@@ -37,6 +38,7 @@ class Transaction{
 class ListTransactions{
     constructor(){
         this.transaction = [];
+        this.saldo = 0;
     }
 
     addTransaction(value){
@@ -51,13 +53,14 @@ class ListTransactions{
     }
 
     initLocalStorage(){
-        if (JSON.parse(localStorage.getItem('transactions') != null)) {
+        if (JSON.parse(localStorage.getItem('transactions')) != null) {
             this.transaction = JSON.parse(localStorage.getItem('transactions'))
         } else {
             this.transaction = []
             this.updateLocalStorage()
         }
     }
+    
 
     printTransactions() {
         document.querySelector('.information-movements').innerHTML = '';
@@ -81,6 +84,73 @@ class ListTransactions{
     
             document.querySelector('.information-movements').appendChild(tr);
         });
+    }
+
+    creditBalance(userName) {
+
+            let amountType = this.transaction;
+            let creditTransaction = amountType.filter(elemento2 => elemento2.type === 'credito')
+    
+            let usersInfo = JSON.parse(localStorage.getItem('usuarios'));
+            console.log(usersInfo);
+    
+            let creditPay;
+    
+            for (let i = 0; i < usersInfo.length; i++) {
+                if (usersInfo[i].usuario == userName) {
+                    creditPay = Number(usersInfo[i].montoInicial);
+                    break;
+                }
+                
+            }
+    
+            for (let i = 0; i < creditTransaction.length; i++) {
+                const element = Number(creditTransaction[i].amount);
+                creditPay += parseFloat(element);
+            }
+
+            // let amountType = this.transaction
+            let balanceTransaction = amountType.filter(elemento => elemento.type === 'gasto');
+    
+    
+            let balanceGastos = 0;
+            for (let i = 0; i < balanceTransaction.length; i++) {
+                const monto = Number(balanceTransaction[i].amount);
+                balanceGastos += monto;
+            }
+            creditPay = creditPay - balanceGastos;
+
+
+            let creditAmount = document.getElementsByClassName('available-amount')[0];
+            creditAmount.textContent = `Q${creditPay.toLocaleString('en', {useGrouping: true})}`;
+
+            let balanceAmount = document.getElementsByClassName('balance-amount')[0];
+            balanceAmount.textContent = `Q${this.saldo.toLocaleString('en', {useGrouping: true})}`;
+
+    }
+
+    
+
+    updateBalanceAmount(){
+        let amountType = this.transaction
+        let balanceTransaction = amountType.filter(elemento => elemento.type === 'gasto');
+
+
+        let balanceGastos = 0;
+        for (let i = 0; i < balanceTransaction.length; i++) {
+            const monto = Number(balanceTransaction[i].amount);
+            balanceGastos += monto;
+        }
+        let balanceAmount = document.getElementsByClassName('balance-amount')[0];
+        balanceAmount.textContent = `Q${balanceGastos.toLocaleString('en', {useGrouping: true})}`;
+    }
+
+    
+    
+    updateStates(){
+        this.updateLocalStorage()
+        this.printTransactions()
+        
     }
     
 }
@@ -128,20 +198,35 @@ sendMovement.addEventListener("click", ()=> {
 
     let transactionType = document.getElementById("selectMovimiento").value;
     transaction.setType(transactionType)
-    console.log(transactionType);
+
 
     let transactionDescription = document.getElementById("mensajeEvento").value;
     transaction.setDescription(transactionDescription)
-    console.log(transactionDescription);
+
 
     let transactionAmount = document.querySelector("#dineroEvento").value;
     transaction.setAmount(transactionAmount)
+    if (transactionType == 'credito') {
+        if (listOfTransactions.saldo != 0) {
+            listOfTransactions.saldo = listOfTransactions.saldo - Number(transactionAmount)
+
+        }
+    }else{
+        listOfTransactions.saldo = listOfTransactions.saldo + Number(transactionAmount)
+
+    }
 
     listOfTransactions.addTransaction(transaction)
 
-    listOfTransactions.updateLocalStorage()
+    listOfTransactions.updateStates();
 
-    listOfTransactions.printTransactions()
+    listOfTransactions.creditBalance(localStorage.getItem('newLogin'), transactionType);
+    
+
+    // listOfTransactions.updateBalanceAmount(transactionType);
+
+
+
 
     movements.style.display = "none";
 })
